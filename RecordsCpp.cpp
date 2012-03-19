@@ -40,8 +40,30 @@ namespace Pod {
 
 		bool operator==(const Person& other) const { return Salary == other.Salary && !strcmp(Name,other.Name);}
 		bool operator!=(const Person& other) const { return !(*this == other);}
-	};
-	
+	};	
+}
+
+namespace Mutable {
+
+    struct foo {
+        int value1;
+        int value2;
+        int value3; 
+        int value4;
+        int value5;
+        int value7;
+        int value6;
+        int value8;
+        int value9;
+    };
+}
+
+typedef const Mutable::foo foo;
+
+foo increment_value7( const foo& f )
+{
+     foo tmp = { f.value1, f.value2, f.value3, f.value4, f.value5, f.value6, f.value7+1, f.value8 };
+     return tmp;
 }
 
 template<class T>
@@ -62,6 +84,10 @@ T rise_salary3(T p) {
 	p.Salary += 1000;
 	return p;
 }
+
+#define CONCATENATE_DETAIL(x, y) x##y
+#define CONCATENATE(x, y) CONCATENATE_DETAIL(x, y)
+#define MAKE_UNIQUE(x) CONCATENATE(x, __LINE__)
 
 #define RECORD1(n, t1, f1)																	\
 	struct n {                                                                              \
